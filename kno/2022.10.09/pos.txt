@@ -1,0 +1,1 @@
+You can integrate your reviews in a page in as a clean list. If you switch the header off and apply Auto width and height, as in this example, the widget will take all available space on the page and will look well-balanced. Make use of filters to fix the amount of reviews, demonstrate only those having positive rating, or conceal certain reviews by keywords.
