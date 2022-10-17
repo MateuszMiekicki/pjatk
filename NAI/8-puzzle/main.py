@@ -1,5 +1,12 @@
 from simpleai.search import astar, SearchProblem
 """
+Mateusz Miekicki s20691
+Oskar Przydatek s19388@
+
+You are given a 3x3 board with numbers from 1-8 and 
+one empty cell in a random position and 
+you are to arrange them in ascending order starting from the top left.
+
 We will use an A* algorithm to solve this problem.
 It is an algorithm that's used to find paths to the solution in a graph.
 This algorithm is a combination of Dijkstra's algorithm and a greedy best-first search.
