@@ -1,16 +1,26 @@
+"""
+Mateusz Miekicki s20691
+Oskar Przydatek s19388
+
+Selection of which films a user should watch and 
+which they should not on the basis of their and other users' film ratings.
+"""
+
 import json
 import numpy as np
 
-def euclidean_score(dataset, user1, user2):
+
+def euclidean_score(dataset: json, user1: str, user2: str):
     '''
      Function checking similarity of users movies using euclidean distance
-    :param dataset: json
-    :type dataset:
-    :param user1: first user
-    :type user1:
-    :param user2: second user to compare
-    :type user2:
-    :return: euclidean distance
+
+    Parameters:
+    dataset (json): dataset in json format
+    user1 (str): first user
+    user2 (str): second user
+
+    Returns:
+    score: Similarity of the selected films 
     '''
     if user1 not in dataset:
         raise TypeError('Cannot find ' + user1 + ' in the dataset')
@@ -36,16 +46,17 @@ def euclidean_score(dataset, user1, user2):
     return 1 / (1 + np.sqrt(np.sum(squared_diff)))
 
 
-def pearson_score(dataset, user1, user2):
+def pearson_score(dataset: json, user1: str, user2: str):
     '''
     Function checking similarity of users movies using pearson correlation
-    :param dataset: data in json file
-    :type dataset:
-    :param user1: first user
-    :type user1:
-    :param user2: second user to compare
-    :type user2:
-    :return: pearson correlation
+
+    Parameters:
+    dataset (json): dataset in json format
+    user1 (str): first user
+    user2 (str): second user
+
+    Returns:
+    score: Similarity of the selected films 
     '''
     if user1 not in dataset:
         raise TypeError('Cannot find ' + user1 + ' in the dataset')
@@ -92,16 +103,18 @@ class RecommendationSystem:
     def get_nearest_user(self, user_to_compare):
         '''
         Function getting the most similar user to compared one.
-        :param user_to_compare:
-        :type user_to_compare:
-        :return: nearest_user
+        Parameters:
+        user_to_compare (str): user to compare
+
+        Returns:
+        user: nearest user
         '''
         user_list = list(self.data.keys())
         user_list.remove(user_to_compare)
         highest_score = 0
         for u in user_list:
-            score = euclidean_score(data, user_to_compare, u)
-            # pearson_score(data, user_to_compare, u) 
+            score = pearson_score(data, user_to_compare, u)
+            # euclidean_score(data, user_to_compare, u)
             self.users_and_scores[u] = score
             if score >= highest_score:
                 highest_score = score
@@ -111,16 +124,15 @@ class RecommendationSystem:
     def get_nearest_users_list(self, user_to_compare):
         '''
         Function getting list of most similar users to compared one.
-        :param user_to_compare:
-        :type user_to_compare:
-        :return: nearest_users_list
+        Parameters:
+        user_to_compare (str): user to compare
+
+        Returns:
+        user: nearest user list
         '''
         nearest = self.get_nearest_user(user_to_compare)
         sorted_nearest_users_dict = {k: v for k, v in sorted(
             self.users_and_scores.items(), key=lambda item: item[1])}
-        for v in list(sorted_nearest_users_dict.values()):
-            if v == 'orange':
-                del sorted_nearest_users_dict[v]
         nearest_users_list = list(sorted_nearest_users_dict.keys())
         nearest_users_list.reverse()
         return nearest_users_list
@@ -128,26 +140,26 @@ class RecommendationSystem:
     def get_common_movies(self, user_to_compare, nearest_user):
         '''
         Function getting movies common for compared users
-        :param user_to_compare:
-        :type user_to_compare:
-        :param nearest_user:
-        :type nearest_user:
-        :return: common_movies
+        Parameters:
+        user_to_compare (str): user to compare
+        nearest_user (str): near user
+
+        Returns:
+        movies: commin films
         '''
         common_movies = []
         i = 0
         for item in self.data[user_to_compare]:
             i += 1
-
             if item in self.data[nearest_user]:
-
                 common_movies.append(item)
         return common_movies
 
     def recommended_movies(self):
         '''
-        Function getting 5 movies worth to recommend
-        :return: recommended_movies
+        function returns the 5 most recommended films
+        Returns:
+        movies: top 5 movies        
         '''
         iterator = 0
         recommended_movies = []
@@ -165,8 +177,9 @@ class RecommendationSystem:
 
     def not_recommended_movies(self):
         '''
-         Function getting 5 movies not worth to recommend
-        :return: not_recommended_movies
+        function returns the 5 most unrecommended films.
+        Returns:
+        movies: worst 5 movies    
         '''
         iterator = 0
         not_recomended_movies = []
@@ -183,11 +196,8 @@ class RecommendationSystem:
         return not_recomended_movies[:5]
 
     def get_most_compatible_users(self):
-        '''
-        Function getting most compatible users.
-        :return:most_compatible_users
-        '''
         return self.most_compatible_users
+
 
 def toString(dataList):
     i = 1
@@ -199,20 +209,12 @@ def toString(dataList):
 with open('ratings.json', 'r', encoding="utf-8") as f:
     data = json.loads(f.read())
 
-# user = input(
-#     "Podaj imie i nazwisko użytkownika, któremu chcesz rekomendować filmy:")
-user ="Paweł Czapiewski"
-while user not in data.keys():
-    print("Użytkownika nie ma w naszej bazie, podaj jednego z:")
-    for i in data.keys():
-        print("", i, ", ", end="")
-    # user = input()
-    user ="Paweł Czapiewski"
+user = "Paweł Czapiewski"
 rSystem = RecommendationSystem(data, user)
 
-print("Filmy, które podobały się osobom, mającym zbliżony gust do wskazanego użytkownika: ")
+print("Polecane: ")
 toString(rSystem.recommended_movies())
-print("Filmy, które nie podobały się osobom, mającym zbliżony gust do wskazanego użytkownika: ")
+print("Lepiej unikac: ")
 toString(rSystem.not_recommended_movies())
-print("Osoby o podobnym guście do wskazanego użytkownika:")
+print("Pdobony gust maja:")
 toString(rSystem.get_most_compatible_users())
