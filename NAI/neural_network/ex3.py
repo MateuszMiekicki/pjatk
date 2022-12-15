@@ -1,5 +1,4 @@
 #https://github.com/kashif/tf-keras-tutorial/blob/tf2/1-fashion-mnist-with-keras.ipynb
-#https://docs.google.com/spreadsheets/d/1o3nJp_iOFYSmBBCY7dcQhRIKCRxCb5Pp8owoKhrOY4U/edit#gid=1706699918
 '''
 Mateusz Miekicki s20691
 Oskar Przydatek s19388
