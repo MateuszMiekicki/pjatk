@@ -1,0 +1,60 @@
+def breadth_first_search
+Gdańsk
+├── Elbląg
+│   ├── Gdańsk
+│   └── Tczew
+├── Gdynia
+│   ├── Gdańsk
+│   │   ├── Elbląg
+│   │   ├── Gdynia
+│   │   ├── Kościerzyna
+│   │   └── Tczew
+│   ├── Lębork
+│   │   ├── Gdynia
+│   │   ├── Kościerzyna
+│   │   ├── Słupsk
+│   │   └── Łeba
+│   └── Władysławowo
+├── Kościerzyna
+│   ├── Bytów
+│   ├── Chojnice
+│   ├── Gdańsk
+│   ├── Lębork
+│   └── Tczew
+└── Tczew
+    ├── Elbląg
+    ├── Gdańsk
+    └── Kościerzyna
+
+failed to reach the target state
+0.001032114028930664
+def deph_first_search
+Gdańsk
+├── Elbląg
+│   ├── Gdańsk
+│   └── Tczew
+├── Gdynia
+│   ├── Gdańsk
+│   │   ├── Elbląg
+│   │   ├── Gdynia
+│   │   ├── Kościerzyna
+│   │   └── Tczew
+│   ├── Lębork
+│   │   ├── Gdynia
+│   │   ├── Kościerzyna
+│   │   ├── Słupsk
+│   │   └── Łeba
+│   └── Władysławowo
+├── Kościerzyna
+│   ├── Bytów
+│   ├── Chojnice
+│   ├── Gdańsk
+│   ├── Lębork
+│   └── Tczew
+└── Tczew
+    ├── Elbląg
+    ├── Gdańsk
+    └── Kościerzyna
+
+failed to reach the target state
+0.0004832744598388672

@@ -1,0 +1,17 @@
+[['Gdansk', 0, 0]]
+['Gdansk', 0, 0]
+
+[]
+['Gdansk', 0, 0]
+
+failed to reach the target state
+--------------------------------------
+[['Gdansk', 0, 0]]
+['Gdansk', 0, 0]
+
+[]
+['Gdansk', 0, 0]
+
+failed to reach the target state
+--------------------------------------
+Z funkcją: 0.0010104179382324219, bez funkcji: 6.4849853515625e-05
