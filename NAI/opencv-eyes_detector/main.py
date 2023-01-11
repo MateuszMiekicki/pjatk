@@ -26,6 +26,8 @@ while True:
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     #detection of face border coordinate
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+    if len(faces) == 0:
+        media.set_pause(1)
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 5)
         roi_gray = gray[y:y+w, x:x+w]
