@@ -25,9 +25,9 @@ namespace
             selected.insert(dis(random));
         return container(selected.begin(), selected.end());
     }
-    void sort(std::vector<int> &vec)
+    void sort(container &vec)
     {
-        for (int j{1}; j < vec.size(); ++j)
+        for (auto j{1}; j < vec.size(); ++j)
         {
             auto key = vec[j];
             int i = j - 1;
@@ -39,23 +39,29 @@ namespace
             vec[i + 1] = key;
         }
     }
+    std::chrono::nanoseconds benchmark(const container &vec)
+    {
+        auto vecCopy = vec;
+        const auto start = std::chrono::high_resolution_clock::now();
+        sort(vecCopy);
+        const auto stop = std::chrono::high_resolution_clock::now();
+        return std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+    }
 }
 
 int main()
 {
-    const auto size = 1'000'000;
+    // note: na potrzeby otrzymania wyników różnych od zera, zwiększyłem ilość elementów o rząd wielkości
+    const auto amountOfElements = {2'000, 4'000, 16'000, 32'000, 20'000, 40'000, 160'000, 320'000};
+    auto orderedCases = std::vector<container>(amountOfElements.size());
+    auto randomCases = std::vector<container>(amountOfElements.size());
+    std::transform(amountOfElements.begin(), amountOfElements.end(), orderedCases.begin(), generateOrderContainer);
+    std::transform(amountOfElements.begin(), amountOfElements.end(), randomCases.begin(), generateRandomContainer);
+    const auto amountOfCases = orderedCases.size();
+    for (auto i{0}; i < amountOfCases; ++i)
     {
-        auto vec = generateRandomContainer(size);
-        const auto start = std::chrono::high_resolution_clock::now();
-        sort(vec);
-        const auto stop = std::chrono::high_resolution_clock::now();
-        std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() / static_cast<double>(size) << "\n";
-    }
-    {
-        auto vec = generateOrderContainer(size);
-        const auto start = std::chrono::high_resolution_clock::now();
-        sort(vec);
-        const auto stop = std::chrono::high_resolution_clock::now();
-        std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(stop - start).count() / static_cast<double>(size) << "\n";
+        std::cout << "for " << orderedCases[i].size() << " elements:\n";
+        std::cout << "Order case: " << benchmark(orderedCases[0]).count() / static_cast<double>(orderedCases[i].size()) << "\n";
+        std::cout << "Random case: " << benchmark(randomCases[0]).count() / static_cast<double>(randomCases[i].size()) << "\n";
     }
 }
