@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><pnml>
+<net id="Net-One" type="P/T net">
+<token id="Default" enabled="true" red="0" green="0" blue="0"/>
+<place id="czerwone">
+<graphics>
+<position x="225.0" y="90.0"/>
+</graphics>
+<name>
+<value>czerwone</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,1</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="zielony">
+<graphics>
+<position x="225.0" y="360.0"/>
+</graphics>
+<name>
+<value>zielony</value>
+<graphics>
+<offset x="17.0" y="33.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<place id="zolte">
+<graphics>
+<position x="225.0" y="225.0"/>
+</graphics>
+<name>
+<value>zolte</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</name>
+<initialMarking>
+<value>Default,0</value>
+<graphics>
+<offset x="0.0" y="0.0"/>
+</graphics>
+</initialMarking>
+<capacity>
+<value>0</value>
+</capacity>
+</place>
+<transition id="T0">
+<graphics>
+<position x="225.0" y="165.0"/>
+</graphics>
+<name>
+<value>T0</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T1">
+<graphics>
+<position x="225.0" y="285.0"/>
+</graphics>
+<name>
+<value>T1</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<transition id="T2">
+<graphics>
+<position x="300.0" y="210.0"/>
+</graphics>
+<name>
+<value>T2</value>
+<graphics>
+<offset x="-5.0" y="35.0"/>
+</graphics>
+</name>
+<orientation>
+<value>0</value>
+</orientation>
+<rate>
+<value>1.0</value>
+</rate>
+<timed>
+<value>false</value>
+</timed>
+<infiniteServer>
+<value>false</value>
+</infiniteServer>
+<priority>
+<value>1</value>
+</priority>
+</transition>
+<arc id="czerwone to T2" source="czerwone" target="T2">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="244" y="114" curvePoint="false"/>
+<arcpath id="001" x="306" y="222" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T0 to czerwone" source="T0" target="czerwone">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="237" y="162" curvePoint="false"/>
+<arcpath id="001" x="237" y="116" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T1 to zolte" source="T1" target="zolte">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="237" y="282" curvePoint="false"/>
+<arcpath id="001" x="237" y="251" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="T2 to zielony" source="T2" target="zielony">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="312" y="207" curvePoint="false"/>
+<arcpath id="001" x="312" y="207" curvePoint="false"/>
+<arcpath id="002" x="243" y="358" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="zielony to T1" source="zielony" target="T1">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="237" y="357" curvePoint="false"/>
+<arcpath id="001" x="237" y="312" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+<arc id="zolte to T0" source="zolte" target="T0">
+<graphics/>
+<inscription>
+<value>Default,1</value>
+<graphics/>
+</inscription>
+<tagged>
+<value>false</value>
+</tagged>
+<arcpath id="000" x="237" y="252" curvePoint="false"/>
+<arcpath id="001" x="237" y="237" curvePoint="false"/>
+<arcpath id="002" x="237" y="192" curvePoint="false"/>
+<type value="normal"/>
+</arc>
+</net>
+</pnml>
