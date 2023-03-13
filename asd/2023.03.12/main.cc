@@ -25,12 +25,13 @@ namespace
             selected.insert(dis(random));
         return container(selected.begin(), selected.end());
     }
-    void sort(container &vec)
+
+    void insertionSort(container &vec)
     {
         for (auto j{1}; j < vec.size(); ++j)
         {
-            auto key = vec[j];
-            int i = j - 1;
+            const auto key = vec[j];
+            auto i = j - 1;
             while (i > -1 and vec[i] > key)
             {
                 vec[i + 1] = vec[i];
@@ -39,11 +40,10 @@ namespace
             vec[i + 1] = key;
         }
     }
-    std::chrono::milliseconds benchmark(const container &vec)
+    std::chrono::milliseconds benchmark(container vec)
     {
-        auto vecCopy = vec;
         const auto start = std::chrono::high_resolution_clock::now();
-        sort(vecCopy);
+        insertionSort(vec);
         const auto stop = std::chrono::high_resolution_clock::now();
         return std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
     }
