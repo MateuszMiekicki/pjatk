@@ -39,7 +39,7 @@ namespace
             vec[i + 1] = key;
         }
     }
-    std::chrono::nanoseconds benchmark(const container &vec)
+    std::chrono::milliseconds benchmark(const container &vec)
     {
         auto vecCopy = vec;
         const auto start = std::chrono::high_resolution_clock::now();
@@ -53,15 +53,17 @@ int main()
 {
     // note: na potrzeby otrzymania wyników różnych od zera, zwiększyłem ilość elementów o rząd wielkości
     const auto amountOfElements = {2'000, 4'000, 16'000, 32'000, 20'000, 40'000, 160'000, 320'000};
-    auto orderedCases = std::vector<container>(amountOfElements.size());
-    auto randomCases = std::vector<container>(amountOfElements.size());
-    std::transform(amountOfElements.begin(), amountOfElements.end(), orderedCases.begin(), generateOrderContainer);
-    std::transform(amountOfElements.begin(), amountOfElements.end(), randomCases.begin(), generateRandomContainer);
-    const auto amountOfCases = orderedCases.size();
-    for (auto i{0}; i < amountOfCases; ++i)
+    for (const auto &amount : amountOfElements)
     {
-        std::cout << "for " << orderedCases[i].size() << " elements:\n";
-        std::cout << "Order case: " << benchmark(orderedCases[0]).count() / static_cast<double>(orderedCases[i].size()) << "\n";
-        std::cout << "Random case: " << benchmark(randomCases[0]).count() / static_cast<double>(randomCases[i].size()) << "\n";
+        std::cout << "for " << amount << " elements:\n";
+        {
+            const auto elapsedTimes = benchmark(generateOrderContainer(amount)).count();
+            std::cout << "Order case: " << elapsedTimes << " ms; " << elapsedTimes / static_cast<double>(amount) << "\n";
+        }
+        {
+            const auto elapsedTimes = benchmark(generateRandomContainer(amount)).count();
+            std::cout << "Random case: " << elapsedTimes << " ms; " << elapsedTimes / static_cast<double>(amount) << "\n";
+        }
+        std::cout << "---------------------\n";
     }
 }
